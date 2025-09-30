@@ -21,7 +21,7 @@ gen_model = None
 if api_key:
     try:
         genai.configure(api_key=api_key)
-        gen_model = genai.GenerativeModel('gemini-1.5-pro-latest')
+        gen_model = genai.GenerativeModel('gemini-2.5-pro')
     except Exception as e:
         st.error(f"Failed to configure Gemini API: {e}")
 else:
@@ -171,7 +171,7 @@ if assets_loaded:
                             st.write(f"**Recipient:** 👤 {row['Recipient_Name']}")
                             st.write(f"**Route:** 🌍 {row['Sender_Country']} → {row['Recipient_Country']}")
                         with col_b:
-                            st.markdown("##### 🤖 Gemini 1.5 Pro Analysis")
+                            st.markdown("##### 🤖 Gemini 2.5 Pro Analysis")
                             with st.spinner("Gemini is analyzing..."):
                                 explanation = get_gemini_explanation(row.to_dict())
                                 st.info(explanation, icon="🧠")
