@@ -1,0 +1,10 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Data and Model assets (optional, if too large for Git)
+# data/
+# model/
