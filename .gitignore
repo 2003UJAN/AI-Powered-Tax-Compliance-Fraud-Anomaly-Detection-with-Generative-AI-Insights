@@ -1,1 +1,30 @@
+Python
 
+pycache/
+*.py[cod]
+*.pyo
+*.pyd
+env/
+venv/
+.env
+
+Data / models
+
+data/.csv
+src/models/.pth
+src/models/.pt
+src/models/.pkl
+*.h5
+models/
+
+Jupyter
+
+.ipynb_checkpoints
+
+VSCode
+
+.vscode/
+
+macOS
+
+.DS_Store
