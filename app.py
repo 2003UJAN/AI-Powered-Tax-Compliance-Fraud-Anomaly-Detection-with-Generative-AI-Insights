@@ -17,8 +17,11 @@ st.set_page_config(page_title="Real-Time Tax Fraud Detection", page_icon="🚨",
 api_key = os.getenv("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY")
 gen_model = None
 if api_key:
-    genai.configure(api_key=api_key)
-    gen_model = genai.GenerativeModel('gemini-pro')
+    try:
+        genai.configure(api_key=api_key)
+        gen_model = genai.GenerativeModel('gemini-pro')
+    except Exception as e:
+        st.error(f"Failed to configure Gemini API: {e}")
 else:
     st.warning("🔑 Gemini API Key not found. Please set it in your .env file or Streamlit secrets.", icon="⚠️")
 
@@ -27,7 +30,7 @@ else:
 def get_gemini_explanation(transaction_data):
     if not gen_model:
         return "Generative AI model is not configured."
-    
+
     prompt = f"""
     Analyze the financial transaction flagged for potential tax fraud/anomaly.
     Provide a concise, expert analysis (3-4 sentences) explaining the suspicious indicators.
@@ -59,7 +62,7 @@ try:
     model, df, feature_list = load_assets()
     assets_loaded = True
 except FileNotFoundError:
-    st.error("Error: Model or data files not found. Please run the data generation and model training scripts first.")
+    st.error("Error: Model or data files not found. Please run the `generate_data.py` script and the `01_model_training.ipynb` notebook first.")
     assets_loaded = False
 
 # --- 4. Streamlit UI ---
